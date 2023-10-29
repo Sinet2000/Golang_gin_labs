@@ -4,12 +4,14 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"os"
+	"semaphore_gin_labs/controllers"
+	"semaphore_gin_labs/models"
 	"testing"
 
 	"github.com/gin-gonic/gin"
 )
 
-var tmpArticleList []article
+var tmpArticleList []models.Article
 
 // This function is used for setup before executing the test functions
 func TestMain(m *testing.M) {
@@ -46,10 +48,10 @@ func testHTTPResponse(t *testing.T, r *gin.Engine, req *http.Request, f func(w *
 // This function is used to store the main lists into the temporary one
 // for testing
 func saveLists() {
-	tmpArticleList = articleList
+	tmpArticleList = controllers.ArticleList
 }
 
 // This function is used to restore the main lists from the temporary one
 func restoreLists() {
-	articleList = tmpArticleList
+	controllers.ArticleList = tmpArticleList
 }

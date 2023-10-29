@@ -4,13 +4,14 @@ package main
 
 import (
 	"net/http"
+	"semaphore_gin_labs/controllers"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
 
 func showIndexPage(c *gin.Context) {
-	articles := getAllArticles()
+	articles := controllers.List()
 
 	// Call the render function with the name of the template to render
 	render(c, gin.H{
@@ -23,7 +24,7 @@ func getArticle(c *gin.Context) {
 	// Check if the article ID is valid
 	if articleID, err := strconv.Atoi(c.Param("article_id")); err == nil {
 		// Check if the article exists
-		if article, err := getArticleByID(articleID); err == nil {
+		if article, err := controllers.GetArticleByID(articleID); err == nil {
 			// Call the HTML method of the Context to render a template
 			c.HTML(
 				// Set the HTTP status to 200 (OK)
