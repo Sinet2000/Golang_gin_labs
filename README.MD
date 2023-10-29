@@ -12,7 +12,11 @@ https://go.dev/doc/tutorial/web-service-gin
 ```bash
 $ go get -u github.com/gin-gonic/gin
 $ go build -o app.out
-$ ./app.out
+$ ./app.
+$ go test -v
+$ curl -X GET -H "Accept: application/json" http://localhost:8080/
+$ curl -X GET -H "Accept: application/xml" http://localhost:8080/article/view/1
+
 ```
 
 ## Getting Started
