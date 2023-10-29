@@ -1,0 +1,36 @@
+#docker network create laravel_network
+
+version: "3.8"
+services:
+
+  laravel-mysql:
+    image: mysql:8.0.1
+    container_name: laravel-mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: P@ssw0rd123.
+      MYSQL_DATABASE: LaravelTestDb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: P@ssw0rd123.
+    ports:
+      - "3306:3306"
+    networks:
+      - laravel_network
+    volumes:
+        - ./data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: laravel-adminer
+    environment:
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - laravel-mysql
+    networks:
+      - laravel_network
+
+networks:
+  laravel_network:
+    external: true
