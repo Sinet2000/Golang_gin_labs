@@ -6,11 +6,11 @@ import (
 	"errors"
 	"fmt"
 	"net"
+	"semaphore_gin_labs/models"
 
-	"github.com/gin-gonic/gin"
+	"gorm.io/driver/sqlite"
+	"gorm.io/gorm"
 )
-
-var router *gin.Engine
 
 func findAvailablePort() (string, error) {
 	// Define the port range you want to check
@@ -30,14 +30,19 @@ func findAvailablePort() (string, error) {
 }
 
 func main() {
+	db, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
+	if err != nil {
+		panic("failed to connect database")
+	}
 
-	router := gin.Default()
-	router.LoadHTMLGlob("templates/*")
+	db.AutoMigrate(&models.Article{})
+	// Create
+	db.Create(&models.Article{ID: 1, Title: "Article 1", Content: "Article 1 body"})
+	db.Create(&models.Article{ID: 2, Title: "Article 2", Content: "Article 2 body"})
+	db.Create(&models.Article{ID: 3, Title: "Article 3", Content: "Article 3 body"})
+	db.Create(&models.Article{ID: 4, Title: "Article 4", Content: "Article 4 body"})
 
-	// Handle Index
-	router.GET("/", showIndexPage)
-	// Handle GET requests at /article/view/some_article_id
-	router.GET("/article/view/:article_id", getArticle)
+	CreateUrlMappings()
 
 	port, err := findAvailablePort()
 	if err != nil {
@@ -46,6 +51,6 @@ func main() {
 	}
 
 	fmt.Printf("Found opened port: %v\n", port)
-	router.Run(port)
+	Router.Run(port)
 
 }

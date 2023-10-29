@@ -2,6 +2,9 @@
 
 This is a simple Go project that demonstrates how to manage dependencies, build, test, and run a Go application.
 
+# ONGOING:
+Reaserching [GORM](https://gorm.io/docs/)
+
 ## Prerequisites
 
 Before you start, make sure you have Go installed. You can download and install it from [https://golang.org/dl/](https://golang.org/dl/).
@@ -11,6 +14,8 @@ https://go.dev/doc/tutorial/web-service-gin
 
 ```bash
 $ go get -u github.com/gin-gonic/gin
+$ go get -u gorm.io/gorm
+$ go get -u gorm.io/driver/sqlite
 $ go build -o app.out
 $ ./app.
 $ go test -v

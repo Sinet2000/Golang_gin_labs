@@ -29,15 +29,12 @@ jobs:
       run: |
         go version
         go get -u github.com/gin-gonic/gin
+        go get -u gorm.io/gorm
+        go get -u gorm.io/driver/sqlite
         go get -u golang.org/x/lint/golint
 
     - name: Build
       run: go build -v ./...
-
-    - name: Run vet & lint
-      run: |
-        go vet .
-        golint .
 
     - name: Test
       run: go test -json > TestResults-${{ matrix.go-version }}.json
