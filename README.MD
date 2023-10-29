@@ -35,13 +35,6 @@ To install all listed dependencies, use the following command:
    go get ./...
    ```
 
-2. **Get All Dependencies**:
-To install all listed dependencies, use the following command:
-
-   ```shell
-   go get ./...
-   ```
-
 ---
 ## Development
 
